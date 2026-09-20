@@ -2,7 +2,7 @@
 
 > **A full-stack Airbnb-inspired property rental platform built with Node.js, Express.js, MongoDB, and EJS.**
 
-WanderLust is a modern property rental web application that enables users to discover, create, update, and manage rental listings. The platform features secure authentication, image uploads, interactive maps, reviews & ratings, and a responsive user interface, providing a seamless booking and property management experience.
+StaySphere is a modern property rental web application that enables users to discover, create, update, and manage rental listings. The platform features secure authentication, image uploads, interactive maps, reviews & ratings, and a responsive user interface, providing a seamless booking and property management experience.
 
 ---
 
@@ -116,7 +116,7 @@ git clone https://github.com/Krishnapal-Chouhan/WanderLust-Property-Rental-Platf
 ## 2️⃣ Navigate to Project
 
 ```bash
-cd WanderLust-Property-Rental-Platform-
+cd WanderLus-Property-Rental-Platform-
 ```
 
 ## 3️⃣ Install Dependencies
