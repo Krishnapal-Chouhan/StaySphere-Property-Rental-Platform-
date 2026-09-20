@@ -1,4 +1,4 @@
-# 🏡 StapSphere - Property Rental Platform
+# 🏡 StaySphere - Property Rental Platform
 
 > **A full-stack Airbnb-inspired property rental platform built with Node.js, Express.js, MongoDB, and EJS.**
 
