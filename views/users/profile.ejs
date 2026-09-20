@@ -1,0 +1,599 @@
+ <% layout("/layouts/boilerplate")%>
+
+
+<style>
+
+    /* =========================================
+   PROFILE PAGE - ADVANCED UI
+========================================= */
+
+.profile-container {
+    min-height: calc(100vh - 100px);
+    padding: 70px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND DECORATION
+========================================= */
+
+.profile-container::before {
+    content: "";
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    background: rgba(15, 118, 110, 0.12);
+
+    border-radius: 50%;
+
+    top: -150px;
+    left: -150px;
+
+    filter: blur(20px);
+}
+
+.profile-container::after {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    background: rgba(13, 148, 136, 0.10);
+
+    border-radius: 50%;
+
+    bottom: -150px;
+    right: -100px;
+
+    filter: blur(25px);
+}
+
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+
+.profile-card {
+
+    width: 100%;
+    max-width: 650px;
+
+    padding: 42px;
+
+    position: relative;
+    z-index: 2;
+
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.12),
+        0 5px 20px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.35s ease;
+}
+
+.profile-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, 0.15),
+        0 10px 30px rgba(15, 118, 110, 0.08);
+}
+
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.profile-header {
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   PROFILE AVATAR
+========================================= */
+
+.profile-avatar {
+
+    width: 90px;
+    height: 90px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f766e,
+            #14b8a6
+        );
+
+    color: white;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px rgba(15, 118, 110, 0.30);
+
+    position: relative;
+}
+
+
+/* Avatar ring */
+
+.profile-avatar::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -5px;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(20, 184, 166, 0.25);
+}
+
+
+/* Online indicator */
+
+.profile-avatar::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 16px;
+    height: 16px;
+
+    right: 2px;
+    bottom: 5px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    border: 3px solid white;
+}
+
+
+/* =========================================
+   USER NAME
+========================================= */
+
+.profile-header h2 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    color: #1f2937;
+}
+
+
+.profile-header p {
+
+    margin: 7px 0 0;
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================
+   PROFILE DETAILS
+========================================= */
+
+.profile-details {
+
+    margin-top: 10px;
+
+    padding: 10px 0 20px;
+}
+
+
+.detail-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 19px 16px;
+
+    margin: 6px 0;
+
+    border-radius: 14px;
+
+    transition: all 0.25s ease;
+}
+
+
+.detail-item:hover {
+
+    background: rgba(15, 118, 110, 0.06);
+
+    transform: translateX(5px);
+}
+
+
+.detail-label {
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #6b7280;
+}
+
+
+.detail-value {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   ACTIVE ACCOUNT
+========================================= */
+
+.account-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #16a34a;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
+.profile-actions {
+
+    display: flex;
+
+    gap: 14px;
+
+    padding-top: 10px;
+}
+
+
+/* Common button */
+
+.profile-actions .btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+
+    text-decoration: none;
+}
+
+
+/* Edit button */
+
+.edit-btn {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f766e,
+            #0d9488
+        );
+
+    border: none;
+
+    box-shadow:
+        0 8px 20px rgba(15, 118, 110, 0.22);
+}
+
+
+.edit-btn:hover {
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(15, 118, 110, 0.32);
+}
+
+
+/* Back button */
+
+.back-btn {
+
+    color: #374151;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+
+.back-btn:hover {
+
+    color: #0f766e;
+
+    background: white;
+
+    border-color: rgba(15, 118, 110, 0.25);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   BUTTON CLICK EFFECT
+========================================= */
+
+.profile-actions .btn:active {
+
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 768px) {
+
+    .profile-container {
+
+        padding: 45px 15px;
+
+    }
+
+    .profile-card {
+
+        padding: 30px 25px;
+
+        border-radius: 22px;
+
+    }
+
+    .profile-avatar {
+
+        width: 75px;
+        height: 75px;
+
+        font-size: 28px;
+
+    }
+
+    .profile-header h2 {
+
+        font-size: 25px;
+
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .profile-container {
+
+        min-height: auto;
+
+        padding: 35px 15px;
+
+    }
+
+    .profile-card {
+
+        padding: 25px 18px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .profile-header {
+
+        gap: 15px;
+
+    }
+
+
+    .profile-avatar {
+
+        width: 65px;
+        height: 65px;
+
+        font-size: 24px;
+
+    }
+
+
+    .profile-avatar::after {
+
+        width: 13px;
+        height: 13px;
+
+        right: 0;
+        bottom: 3px;
+
+        border-width: 2px;
+
+    }
+
+
+    .profile-header h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .profile-header p {
+
+        font-size: 12px;
+
+    }
+
+
+    .detail-item {
+
+        padding: 15px 12px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+
+    }
+
+
+    .detail-value {
+
+        font-size: 14px;
+
+        word-break: break-word;
+
+    }
+
+
+    .profile-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .profile-actions .btn {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>
+<div class="container profile-container">
+
+    <div class="profile-card">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <%= user.username.charAt(0).toUpperCase() %>
+            </div>
+
+            <div>
+                <h2><%= user.username %></h2>
+                <p>StayNest Member</p>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-details">
+
+            <div class="detail-item">
+                <span class="detail-label">Username</span>
+                <span class="detail-value">
+                    <%= user.username %>
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">
+                    <%= user.email %>
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Account</span>
+                <span class="detail-value account-status">
+                    ● Active
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="profile-actions">
+            <a href="/profile/edit" class="btn edit-btn">
+                <i class="fa-regular fa-pen-to-square"></i>
+                Edit Profile
+            </a>
+
+            <a href="/listings" class="btn back-btn">
+                Back to Listings
+            </a>
+        </div>
+
+    </div>
+
+</div>

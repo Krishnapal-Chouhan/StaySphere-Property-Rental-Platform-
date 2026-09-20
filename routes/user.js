@@ -38,6 +38,13 @@ router.route("/login")
     userController.userLogin
 );
 // OR----
+// EXTRA Work
+router.get("/profile", (req, res) => {
+    res.render("users/profile", {
+        user: req.user
+    });
+});
+
 
 // ------------------------------------------------------------------------
 

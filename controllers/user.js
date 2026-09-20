@@ -15,7 +15,7 @@ try{
         next(err);
     }
 
-    req.flash("success", "WelCome To WanderLust");
+    req.flash("success", "WelCome To StaySphere");
     res.redirect("/listings");
 
    });
@@ -35,7 +35,7 @@ module.exports.renderLogin = (req,res)=>{
 
 
 module.exports.userLogin =     async (req, res) => {
-        req.flash("success", "Welcome Back to WanderLust");
+        req.flash("success", "Welcome Back to StaySphere");
 
         // let redirectUrl = res.locals.redirectUrl || "/listings";
 
