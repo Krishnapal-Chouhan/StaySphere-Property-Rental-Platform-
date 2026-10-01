@@ -110,13 +110,13 @@ WanderLust/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/Krishnapal-Chouhan/WanderLust-Property-Rental-Platform-.git
+git clone https://github.com/Krishnapal-Chouhan/StaySphere-Property-Rental-Platform-.git
 ```
 
 ## 2️⃣ Navigate to Project
 
 ```bash
-cd WanderLus-Property-Rental-Platform-
+cd StaySphere-Property-Rental-Platform-
 ```
 
 ## 3️⃣ Install Dependencies
@@ -139,6 +139,7 @@ MAPBOX_TOKEN=your_mapbox_token
 ATLASDB_URL=your_mongodb_connection_string
 
 SECRET=your_session_secret
+CARTO_API_KEY= api_Key
 ```
 
 ## 5️⃣ Run the Application
@@ -164,14 +165,12 @@ http://localhost:8080
 # 📸 Project Screenshots
 
 ## 🏠 Home Page
-
-<img width="1191" alt="Home Page" src="https://github.com/user-attachments/assets/b074dee0-032b-4d32-b7fb-ffb82fa65891" />
+<img width="1479" height="986" alt="image" src="https://github.com/user-attachments/assets/65b65de7-fd4d-469a-8520-bcb3c7ce911f" />
 
 ---
 
 ## 📄 Listing Details
-
-<img width="1870" alt="Listing Details" src="https://github.com/user-attachments/assets/48c64787-fc89-4035-a0a6-02642b464290" />
+<img width="1652" height="946" alt="image" src="https://github.com/user-attachments/assets/89fff350-6d2b-42ce-8ea2-96120160a96f" />
 
 ---
 
@@ -179,49 +178,50 @@ http://localhost:8080
 
 Search listings instantly by title, location, country, or description.
 
-<img width="1163" alt="Search Feature" src="https://github.com/user-attachments/assets/3476eee7-0c48-4b7a-8f97-9b5bf0a60e4d" />
+<img width="1717" height="939" alt="image" src="https://github.com/user-attachments/assets/3d160e91-f1f7-40a5-9bf0-5ca6140a607c" />
+
 
 ---
 
 ## ➕ Add Listing
 
-<img width="1332" alt="Add Listing" src="https://github.com/user-attachments/assets/e6769250-5dc5-409c-ae2b-76487a33ba35" />
+<img width="1490" height="940" alt="image" src="https://github.com/user-attachments/assets/1055daf8-1b88-49fe-b8e9-e09e89bdd149" />
 
 ---
 
 ## ✏️ Edit Listing
 
-<img width="1801" alt="Edit Listing" src="https://github.com/user-attachments/assets/590dabc8-1b81-4870-a26f-cfc15c516e8f" />
+<img width="1030" height="909" alt="image" src="https://github.com/user-attachments/assets/1bca250c-7abe-486d-9d3f-f871669f5327" />
+
 
 ---
 
 ## ⭐ Review System
-
-<img width="1910" alt="Reviews" src="https://github.com/user-attachments/assets/b4aac8a6-7a96-43f3-9716-99e8a398b6a2" />
+<img width="1626" height="920" alt="image" src="https://github.com/user-attachments/assets/19e23cc0-6521-4bf5-9769-18eb7dcf46c3" />
 
 ---
 
 ## 🗺️ Map Integration
 
-<img width="989" alt="Map Feature" src="https://github.com/user-attachments/assets/dc96f06d-0bf6-40b2-a0c8-dd1a3abfac48" />
+<img width="1904" height="929" alt="image" src="https://github.com/user-attachments/assets/220527c0-991b-4c5d-a0fd-7d75078be303" />
 
 ---
 
 ## 🔐 Login Page
 
-<img width="1900" alt="Login Page" src="https://github.com/user-attachments/assets/695602f0-95af-4765-adba-e41d56c841d4" />
+<img width="1669" height="916" alt="image" src="https://github.com/user-attachments/assets/4af4772f-312a-40c2-a8bb-68016fa4e76a" />
 
 ---
 
 ## 📝 Signup Page
-
-<img width="1904" alt="Signup Page" src="https://github.com/user-attachments/assets/034035ec-58b3-4b2c-b85d-eb687492fa87" />
+<img width="1566" height="942" alt="image" src="https://github.com/user-attachments/assets/6cfefd97-eab9-4f4f-be9a-711428524bd9" />
 
 ---
 
 ## ✅ Client-side Validation
 
-<img width="1813" alt="Client Validation" src="https://github.com/user-attachments/assets/31218af6-0ba9-49de-a278-fe80c5638f2e" />
+<img width="923" height="940" alt="image" src="https://github.com/user-attachments/assets/cc32f08a-bece-4efb-9818-74cf16453614" />
+
 
 ---
 
@@ -233,7 +233,14 @@ Search listings instantly by title, location, country, or description.
 
 ## 📌 Footer
 
-<img width="938" alt="Footer" src="https://github.com/user-attachments/assets/f69bef4a-891c-4df8-b767-45ca9c642f78" />
+<img width="1904" height="944" alt="image" src="https://github.com/user-attachments/assets/b90fe26b-2b7e-445c-be8e-36e6de502f59" />
+
+## 📝 Profile page
+<img width="1917" height="1000" alt="Screenshot 2026-10-01 164051" src="https://github.com/user-attachments/assets/96c7cfd6-25d5-4ede-93be-e9129677a875" />
+
+
+## 📝 Profile page Edit
+<img width="1919" height="956" alt="Screenshot 2026-10-01 164124" src="https://github.com/user-attachments/assets/b35fc77a-1cc0-45c2-a18a-f19ca7f9a3f3" />
 
 ---
 
