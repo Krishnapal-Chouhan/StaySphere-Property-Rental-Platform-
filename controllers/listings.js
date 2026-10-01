@@ -29,8 +29,8 @@ module.exports.addListingItem = async (req, res) => {
 
 
     const address = `${location}, ${country}`;
-    console.log(location);
-    console.log(country);
+    // console.log(location);
+    // console.log(country);
 
 
     const response = await axios.get(

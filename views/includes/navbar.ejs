@@ -1,229 +1,835 @@
-<!-- ////////////// -->
 <style>
-    /* ================= NAVBAR ================= */
+/* =========================================================
+   STAYSPHERE NAVBAR
+========================================================= */
+
+.custom-navbar {
+    height: 70px;
+    padding: 0 10px;
+
+    background: #071a2a !important;
+
+    border-bottom: 1px solid rgba(91, 170, 190, 0.18) !important;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+}
+
+
+/* =========================================================
+   NAVBAR CONTAINER
+========================================================= */
+
+.custom-navbar .container-fluid {
+    max-width: 1500px;
+    margin: auto;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+
+    margin-right: 30px;
+}
+
+
+/* Compass Circle */
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+
+    border: 3px solid #ff385c;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff385c;
+
+    font-size: 21px;
+
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .brand-icon {
+    transform: rotate(1000deg);
+
+    /* box-shadow: 0 0 18px rgba(255, 56, 92, 0.35); */
+}
+
+
+/* Brand Name */
+
+.brand-name {
+    color: #e9f3f7 !important;
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.navbar-nav .nav-link {
+    color: #c4d3db !important;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    padding: 10px 18px !important;
+
+    border-radius: 25px;
+
+    transition: all 0.25s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+
+    background: rgba(0, 217, 220, 0.08);
+}
+
+
+/* Active Explore */
+
+.explore-link {
+    color: #ffffff !important;
+
+    background: rgba(0, 217, 220, 0.10);
+
+    position: relative;
+}
+
+.explore-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 22px;
+    right: 22px;
+
+    bottom: 4px;
+
+    height: 2px;
+
+    background: #00d9dc;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   SEARCH AREA
+========================================================= */
+
+.nav-search-wrapper {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+
+    margin: 0 25px;
+}
+
+
+/* Search Form */
+
+.search-form {
+    width: 100%;
+    max-width: 480px;
+
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    background: #0c2337;
+
+    border: 1px solid rgba(104, 157, 176, 0.28);
+
+    border-radius: 50px;
+
+    padding: 4px;
+
+    transition: all 0.3s ease;
+}
+
+.search-form:focus-within {
+    border-color: #00d9dc;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 217, 220, 0.08),
+        0 0 20px rgba(0, 217, 220, 0.08);
+}
+
+
+/* Search Icon */
+
+.search-icon {
+    color: #91aab8;
+
+    margin-left: 17px;
+    margin-right: 10px;
+
+    font-size: 15px;
+}
+
+
+/* Search Input */
+
+.search-inp {
+    flex: 1;
+
+    height: 38px;
+
+    border: none !important;
+    outline: none !important;
+
+    box-shadow: none !important;
+
+    background: transparent !important;
+
+    color: #ffffff !important;
+
+    font-size: 14px;
+
+    padding: 0 5px;
+}
+
+.search-inp::placeholder {
+    color: #7f96a5;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.btn-search {
+    height: 40px;
+
+    padding: 0 21px;
+
+    border: none !important;
+
+    border-radius: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #ff385c !important;
+
+    color: #ffffff !important;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow: 0 5px 15px rgba(255, 56, 92, 0.20);
+
+    transition: all 0.25s ease;
+}
+
+.btn-search:hover {
+    background: #ff1744 !important;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 20px rgba(255, 56, 92, 0.35);
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-left: auto;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-btn {
+    color: #d7e4ea !important;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    padding: 9px 14px !important;
+
+    text-decoration: none;
+
+    transition: 0.25s ease;
+}
+
+.login-btn:hover {
+    color: #00d9dc !important;
+}
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+.signup-btn {
+    color: #ffffff !important;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    padding: 9px 17px !important;
+
+    border: 1px solid rgba(0, 217, 220, 0.45);
+
+    border-radius: 25px;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+.signup-btn:hover {
+    background: rgba(0, 217, 220, 0.10);
+
+    border-color: #00d9dc;
+
+    color: #00ffff !important;
+}
+
+
+/* =========================================================
+   PROFILE BUTTON
+========================================================= */
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 45px;
+
+    padding: 5px 12px 5px 5px !important;
+
+    background: #0d2236 !important;
+
+    border: 1px solid rgba(111, 148, 164, 0.30) !important;
+
+    border-radius: 12px !important;
+
+    color: #e4edf1 !important;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.profile-btn:hover {
+    background: #112c43 !important;
+
+    border-color: rgba(0, 217, 220, 0.40) !important;
+}
+
+
+/* Remove Bootstrap focus */
+
+.profile-btn:focus {
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.iconik {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ff385c;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 12px rgba(255, 56, 92, 0.25);
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.custom-dropdown {
+    background: #0b2235 !important;
+
+    border: 1px solid rgba(100, 153, 173, 0.25) !important;
+
+    border-radius: 14px !important;
+
+    padding: 8px !important;
+
+    margin-top: 10px !important;
+
+    min-width: 210px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.40);
+}
+
+
+/* Dropdown Items */
+
+.custom-dropdown .dropdown-item {
+    color: #d9e7ed;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.custom-dropdown .dropdown-item:hover {
+    color: #00d9dc;
+
+    background: rgba(0, 217, 220, 0.08);
+}
+
+
+/* Divider */
+
+.custom-dropdown .dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+
+/* Logout */
+
+.custom-dropdown .logout-item {
+    color: #ff7189 !important;
+}
+
+.custom-dropdown .logout-item:hover {
+    color: #ff385c !important;
+
+    background: rgba(255, 56, 92, 0.08);
+}
+
+
+/* =========================================================
+   MOBILE TOGGLE
+========================================================= */
+
+.navbar-toggler {
+    border: 1px solid rgba(0, 217, 220, 0.35);
+
+    border-radius: 10px;
+
+    padding: 7px 10px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(0, 217, 220, 0.08);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
 
     .custom-navbar {
-        background: #fff;
-        padding: 12px 20px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, .08);
+        padding: 0 18px;
     }
 
-    .navbar-brand i {
-        color: #ff385c;
-        font-size: 2rem;
+    .navbar-brand {
+        margin-right: 12px;
     }
 
     .brand-name {
-        font-weight: 700;
-        color: #00b894 !important;
+        font-size: 1.15rem;
+    }
+
+    .nav-search-wrapper {
+        margin: 0 12px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .custom-navbar {
+        height: auto;
+
+        padding: 12px 16px;
+    }
+
+    .navbar-collapse {
+        padding-top: 15px;
+    }
+
+    .nav-search-wrapper {
+        width: 100%;
+
+        margin: 12px 0;
+    }
+
+    .search-form {
+        max-width: none;
+    }
+
+    .nav-right {
+        width: 100%;
+
+        margin-top: 8px;
+
+        padding-top: 12px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+        justify-content: flex-start;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 14px !important;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .brand-name {
         font-size: 1.05rem;
     }
 
-    /* ================= SEARCH ================= */
+    .brand-icon {
+        width: 38px;
+        height: 38px;
 
-    .search-form {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .search-inp {
-        width: 420px;
-        height: 46px;
-        border-radius: 50px;
-        border: 1px solid #ddd;
-        padding: 0 20px;
-        font-size: 15px;
-        transition: .3s;
-    }
-
-    .search-inp:focus {
-        border-color: #ff385c;
-        box-shadow: 0 0 0 .18rem rgba(255, 56, 92, .18);
-    }
-
-    .search-inp::placeholder {
-        color: #777;
+        font-size: 19px;
     }
 
     .btn-search {
-        height: 46px;
-        border-radius: 50px;
-        background: #ff385c;
-        color: #fff;
-        border: none;
-        padding: 0 22px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        transition: .3s;
+        width: 40px;
+
+        padding: 0;
     }
 
-    .btn-search:hover {
-        background: #e11d48;
-        color: #fff;
-        transform: translateY(-2px);
+    .btn-search span {
+        display: none;
     }
 
-    .btn-search i {
-        margin: 0;
+    .profile-btn span.username {
+        display: none;
     }
 
-    /* ================= AVATAR ================= */
-
-    .iconik {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: #ff385dde;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media(max-width:991px) {
-
-        .mx-auto {
-            width: 100%;
-        }
-
-        .search-form {
-            margin: 15px 0;
-            width: 100%;
-        }
-
-        .search-inp {
-            width: 100%;
-        }
-
-        .navbar-nav.ms-auto {
-            margin-top: 15px;
-        }
-
-    }
-
-    @media(max-width:576px) {
-
-        .search-form {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .btn-search {
-            width: 100%;
-            justify-content: center;
-        }
-
-    }
+}
 </style>
 
 
+<!-- =========================================================
+     STAYSPHERE NAVBAR
+========================================================= -->
 
-<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom custom-navbar sticky-top">
+<nav class="navbar navbar-expand-md custom-navbar sticky-top">
+
     <div class="container-fluid">
 
-        <!-- Brand -->
-        <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
 
-        <!-- Toggle Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- ================= BRAND ================= -->
+
+        <a class="navbar-brand" href="/">
+
+            <span class="brand-icon">
+                <i class="fa-regular fa-compass"></i>
+            </span>
+
+            <span class="brand-name">
+                StaySphere
+            </span>
+
+        </a>
+
+
+        <!-- ================= MOBILE TOGGLE ================= -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
+
         </button>
 
-        <!-- Navbar Content -->
+
+        <!-- ================= NAVBAR CONTENT ================= -->
+
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            <!-- LEFT SIDE LINKS -->
+
+            <!-- ================= EXPLORE ================= -->
+
             <div class="navbar-nav">
-                <!-- <a class="nav-link" href="/listings">Home</a> -->
-                <a class="nav-link" href="/listings">Explore</a>
-             <!-- <a class="nav-link" href="/listings/new">Add Listing</a> -->
-               <!-- <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link" href="#">More</a> -->
+
+                <a
+                    class="nav-link explore-link"
+                    href="/listings">
+
+                    Explore
+
+                </a>
+
             </div>
 
-            <!-- <div class="navbar-nav ms-auto">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination"
-                        aria-label="Search" style="color: aliceblue;" />
-                    <button class="btn btn-search" type="submit"><i
-                            class="fa-solid fa-magnifying-glass"></i>Search</button>
+
+            <!-- ================= SEARCH ================= -->
+
+            <div class="nav-search-wrapper">
+
+                <form
+                    class="search-form"
+                    role="search"
+                    action="/listings"
+                    method="GET">
+
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+                    <input
+                        class="search-inp"
+                        type="search"
+                        name="search"
+                        placeholder="Search Destination"
+                        value="<%= typeof search !== 'undefined' ? search : '' %>"
+                        aria-label="Search Destination">
+
+                    <button
+                        class="btn btn-search"
+                        type="submit">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <span>Search</span>
+
+                    </button>
+
                 </form>
-            </div> -->
+
+            </div>
 
 
-            <form class="d-flex" role="search" action="/listings" method="GET">
+            <!-- ================= RIGHT SIDE ================= -->
 
-                <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search Destination"
-                    value="<%= typeof search !== 'undefined' ? search : '' %>" />
-
-                <button class="btn btn-search" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    Search
-                </button>
-
-            </form>
+            <div class="nav-right">
 
 
-            <!-- RIGHT SIDE -->
-            <div class="navbar-nav ms-auto d-flex align-items-center gap-2">
-
-                <a class="nav-link" href="/listings"
-                    style="font-weight: 800; color: aquamarine ; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">StaySphere</a>
                 <% if(!currUser){ %>
 
-                    <a class="nav-link" href="/login"><b>Login</b></a>
-                    <a class="nav-link" href="/signup"><b>Signup</b></a>
-                    <% } %>
+                    <!-- LOGIN -->
 
-                        <% if(currUser){ %>
+                    <a
+                        href="/login"
+                        class="login-btn">
 
-                            <!-- Logout -->
-                            <!-- <a class="nav-link" href="/logout">Logout</a> -->
+                        Login
 
-                            <!-- Profile Dropdown -->
-                            <div class="dropdown">
+                    </a>
 
-                                <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2"
-                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                    <!-- Avatar -->
-                                    <div class="iconik">
-                                        <%= currUser?.username ? currUser.username.charAt(0).toUpperCase() : "G" %>
-                                    </div>
+                    <!-- SIGNUP -->
 
-                                    <span>
-                                        <%= currUser.username %>
-                                    </span>
-                                </button>
+                    <a
+                        href="/signup"
+                        class="signup-btn">
 
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <!-- <li><a class="dropdown-item" href="/profile">My Profile</a></li> -->
-                                  <li>  <% if (currUser) { %>
-    <a href="/profile" class=" dropdown-item">
-         My Profile
-    </a>
-<% } %></li>
-                                    <li><a class="dropdown-item" href="/listings/new">Add Listing</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
-                                </ul>
+                        Signup
+
+                    </a>
+
+
+                <% } %>
+
+
+                <% if(currUser){ %>
+
+                    <!-- PROFILE DROPDOWN -->
+
+                    <div class="dropdown">
+
+                        <button
+                            class="btn profile-btn dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <!-- Avatar -->
+
+                            <div class="iconik">
+
+                                <%= currUser?.username
+                                    ? currUser.username.charAt(0).toUpperCase()
+                                    : "G"
+                                %>
 
                             </div>
 
-                            <% } %>
+
+                            <!-- Username -->
+
+                            <span class="username">
+
+                                <%= currUser.username %>
+
+                            </span>
+
+                        </button>
+
+
+                        <!-- DROPDOWN -->
+
+                        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+
+
+                            <!-- PROFILE -->
+
+                            <li>
+
+                                <a
+                                    href="/profile"
+                                    class="dropdown-item">
+
+                                    <i class="fa-regular fa-user me-2"></i>
+
+                                    My Profile
+
+                                </a>
+
+                            </li>
+
+
+                            <!-- ADD LISTING -->
+
+                            <li>
+
+                                <a
+                                    href="/listings/new"
+                                    class="dropdown-item">
+
+                                    <i class="fa-solid fa-plus me-2"></i>
+
+                                    Add Listing
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <hr class="dropdown-divider">
+
+                            </li>
+
+
+                            <!-- LOGOUT -->
+
+                            <li>
+
+                                <a
+                                    href="/logout"
+                                    class="dropdown-item logout-item">
+
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+
+                                    Logout
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                <% } %>
 
             </div>
 
         </div>
+
     </div>
+
 </nav>

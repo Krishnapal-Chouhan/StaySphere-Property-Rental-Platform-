@@ -1,219 +1,499 @@
-<% layout("/layouts/boilerplate")%>
-    <!-- <div class="row">
-        <div class="col-6 offset-3">
-            <h1>Login on WanderLust</h1>
-            <form action="/login" method="POST" class="needs-validation" novalidate>
-                 <div class="mb-3">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username"  class="form-control"
-                            required>
-                        <div class="valid-feedback">Look Nice</div>
-                         <div class="invalid-feedback">Required</div>
-                       
-                    </div>
-                   
+<% layout("/layouts/boilerplate") %>
 
-                    <div class="mb-3">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password"  class="form-control"
-                            required>
-                        <div class="valid-feedback">Look Nice</div>
-                         <div class="invalid-feedback">Required</div>
-                        
-                        
-                       
-                    </div>
+<style>
+    .login-page {
+        min-height: calc(100vh - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 20px;
+        position: relative;
+        overflow: hidden;
 
-                    <button class="btn btn-success">Sign Up</button>
-            </form>
+        background:
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(20, 213, 195, 0.12),
+                transparent 32%
+            ),
+            radial-gradient(
+                circle at 85% 80%,
+                rgba(255, 56, 92, 0.12),
+                transparent 32%
+            ),
+            #0b1424;
+    }
 
-            </div>
-            </div> -->
+    /* Background glow */
+    .login-page::before {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: rgba(20, 213, 195, 0.07);
+        filter: blur(80px);
+        top: -180px;
+        left: -150px;
+        pointer-events: none;
+    }
 
+    .login-page::after {
+        content: "";
+        position: absolute;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        background: rgba(255, 56, 92, 0.07);
+        filter: blur(80px);
+        right: -150px;
+        bottom: -160px;
+        pointer-events: none;
+    }
 
+    /* Login card */
+    .login-card {
+        width: 100%;
+        max-width: 430px;
+        padding: 38px;
 
+        position: relative;
+        z-index: 2;
 
+        background: rgba(17, 30, 49, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
 
+        box-shadow:
+            0 25px 70px rgba(0, 0, 0, 0.42),
+            inset 0 1px 0 rgba(255, 255, 255, 0.03);
 
+        animation: loginFade 0.55s ease;
+    }
 
+    @keyframes loginFade {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
 
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
+    /* Logo */
+    .login-logo {
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 18px;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
+        border-radius: 20px;
 
-    <!-- NEW STYLE -->
-     <% layout("/layouts/boilerplate")%>
-
-        <style>
-            body {
-                /* background: linear-gradient(135deg,#667eea,#764ba2); */
-                /* background: linear-gradient(135deg,
-                        #0f172a,
-                        #1e293b,
-                        #134e4a); */
-                /* col -02 */
-                /* background: linear-gradient(135deg,
-                        #fff7ed,
-                        #ffedd5,
-                        #fce7f3); */
-
-                         background: linear-gradient(
+        background: linear-gradient(
             135deg,
-            #0F172A 0%,
-            #1E293B 50%,
-            #14B8A6 100%
+            #ff385c,
+            #ff617d
         );
 
-                        
-                min-height: 100vh;
-            }
+        color: white;
+        font-size: 29px;
 
-            .login-container {
-                min-height: 85vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+        box-shadow:
+            0 12px 30px rgba(255, 56, 92, 0.25);
+    }
 
-            .login-card {
-                width: 100%;
-                max-width: 450px;
-                padding: 2rem;
-                border-radius: 25px;
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-                animation: fadeInUp 0.8s ease;
-            }
+    /* Heading */
+    .login-title {
+        margin: 0;
+        text-align: center;
 
-            .login-title {
-                text-align: center;
-               /* color: #134E4A; */
-                color:#fff;
-                 /* color:rgba(255,255,255,.8); */
-                font-weight: 700;
-                margin-bottom: 1.8rem;
-                letter-spacing: 1px;
-            }
+        color: #f5f7fa;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.4px;
+    }
 
-            .form-label {
-                  color:#fff;
-                font-weight: 500;
-            }
+    .login-subtitle {
+        margin: 8px 0 30px;
 
-            .form-control {
-                border: none;
-                border-radius: 12px;
-                padding: 12px;
-                background: rgba(255, 255, 255, 0.85);
-                transition: all 0.3s ease;
-            }
+        text-align: center;
 
-            .form-control:focus {
-                transform: translateY(-2px);
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            }
+        color: #8492a6;
+        font-size: 14px;
+        line-height: 1.6;
+    }
 
-            .btn-login {
-                width: 100%;
-                padding: 12px;
-                border: none;
-                border-radius: 12px;
-                background: linear-gradient(135deg, #ff9966, #ff5e62);
-                color: white;
-                font-size: 1.1rem;
-                font-weight: 600;
-                transition: all 0.3s ease;
-            }
+    /* Labels */
+    .login-label {
+        display: block;
+        margin-bottom: 8px;
 
-            .btn-login:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(255, 94, 98, 0.4);
-            }
+        color: #dce5ef;
+        font-size: 14px;
+        font-weight: 600;
+    }
 
-            .welcome-text {
-                text-align: center;
-             color:#FBBF24;
-                margin-bottom: 20px;
-                opacity: 0.9;
-            }
+    /* Input wrapper */
+    .input-wrapper {
+        position: relative;
+    }
 
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(40px);
-                }
+    .login-input {
+        width: 100%;
+        height: 50px;
+        padding: 0 15px;
 
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
+        box-sizing: border-box;
 
-            .floating {
-                animation: floating 3s ease-in-out infinite;
-            }
+        border: 1px solid #2a3b52;
+        border-radius: 12px;
 
-            @keyframes floating {
-                0% {
-                    transform: translateY(0px);
-                }
+        background: #111e31;
+        color: #f5f7fa;
 
-                50% {
-                    transform: translateY(-10px);
-                }
+        outline: none;
 
-                100% {
-                    transform: translateY(0px);
-                }
-            }
- 
-        </style>
+        font-size: 15px;
 
-        <div class="container login-container">
+        transition: 0.25s ease;
+    }
 
-            <div class="login-card floating">
+    .login-input::placeholder {
+        color: #64748b;
+    }
 
-                <h1 class="login-title">🏡 StaySphere</h1>
+    .login-input:hover {
+        border-color: #3c4e66;
+    }
 
-                <p class="welcome-text">
-                    Welcome Back! Sign in to continue your journey.
-                </p>
+    .login-input:focus {
+        border-color: #20d5c3;
+        background: #122137;
 
-                <form action="/login" method="POST" class="needs-validation" novalidate>
+        box-shadow:
+            0 0 0 3px rgba(32, 213, 195, 0.10);
+    }
 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">
-                            Username
-                        </label>
+    /* Password input */
+    .password-input {
+        padding-right: 48px;
+    }
 
-                        <input type="text" id="username" name="username" class="form-control" required>
+    .password-toggle {
+        position: absolute;
+        right: 14px;
+        top: 50%;
 
-                        <div class="invalid-feedback">
-                            Please enter username
-                        </div>
-                    </div>
+        transform: translateY(-50%);
 
-                    <div class="mb-4">
-                        <label for="password" class="form-label">
-                            Password
-                        </label>
+        border: none;
+        background: transparent;
 
-                        <input type="password" id="password" name="password" class="form-control" required>
+        color: #718198;
+        cursor: pointer;
 
-                        <div class="invalid-feedback">
-                            Please enter password
-                        </div>
-                    </div>
+        padding: 5px;
+    }
 
-                    <button class="btn-login">
-                        Login
-                    </button>
+    .password-toggle:hover {
+        color: #20d5c3;
+    }
 
-                </form>
+    /* Login button */
+    .btn-login {
+        width: 100%;
+        height: 50px;
+
+        margin-top: 5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+
+        border: none;
+        border-radius: 12px;
+
+        background: linear-gradient(
+            135deg,
+            #ff385c,
+            #ff4f70
+        );
+
+        color: white;
+
+        font-size: 15px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.25s ease;
+
+        box-shadow:
+            0 8px 24px rgba(255, 56, 92, 0.20);
+    }
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 12px 30px rgba(255, 56, 92, 0.32);
+    }
+
+    .btn-login:active {
+        transform: scale(0.98);
+    }
+
+    /* Divider */
+    .login-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        margin: 25px 0 20px;
+
+        color: #5f6e82;
+        font-size: 12px;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Signup */
+    .signup-text {
+        margin: 0;
+
+        text-align: center;
+
+        color: #7f8da1;
+        font-size: 13px;
+    }
+
+    .signup-link {
+        color: #20d5c3;
+        font-weight: 600;
+        text-decoration: none;
+        margin-left: 4px;
+    }
+
+    .signup-link:hover {
+        color: #5ee7d9;
+        text-decoration: underline;
+    }
+
+    /* Validation */
+    .invalid-feedback {
+        color: #ff718b;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+
+        .login-page {
+            padding: 35px 15px;
+        }
+
+        .login-card {
+            padding: 30px 22px;
+            border-radius: 20px;
+        }
+
+        .login-logo {
+            width: 60px;
+            height: 60px;
+            font-size: 25px;
+        }
+
+        .login-title {
+            font-size: 24px;
+        }
+
+        .login-subtitle {
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+    }
+</style>
+
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <!-- Logo -->
+        <div class="login-logo">
+            <i class="fa-solid fa-house-chimney"></i>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="login-title">
+            Welcome Back
+        </h1>
+
+        <p class="login-subtitle">
+            Sign in to your StaySphere account
+            and continue your journey.
+        </p>
+
+
+        <!-- Login Form -->
+        <form
+            action="/login"
+            method="POST"
+            class="needs-validation"
+            novalidate
+        >
+
+            <!-- Username -->
+            <div class="mb-4">
+
+                <label
+                    for="username"
+                    class="login-label"
+                >
+                    Username
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        class="login-input"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter your username.
+                </div>
 
             </div>
 
-        </div> 
+
+            <!-- Password -->
+            <div class="mb-4">
+
+                <label
+                    for="password"
+                    class="login-label"
+                >
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="login-input password-input"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter your password.
+                </div>
+
+            </div>
+
+
+            <!-- Login Button -->
+            <button
+                type="submit"
+                class="btn-login"
+            >
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- Divider -->
+        <div class="login-divider">
+            OR
+        </div>
+
+
+        <!-- Signup -->
+        <p class="signup-text">
+            Don't have an account?
+            <a
+                href="/signup"
+                class="signup-link"
+            >
+                Create Account
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+    // Password visibility
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+
+    if (togglePassword && passwordInput) {
+
+        togglePassword.addEventListener("click", () => {
+
+            const isPassword =
+                passwordInput.type === "password";
+
+            // passwordInput.type =
+            //     isPassword ? "text" : "password";
+
+            if (isPassword) {
+    passwordInput.type = "text";
+            } else {
+    passwordInput.type = "password";
+            }
+
+            togglePassword.innerHTML = isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+
+            togglePassword.setAttribute(
+                "aria-label",
+                isPassword
+                    ? "Hide password"
+                    : "Show password"
+            );
+        });
+    }
+</script>

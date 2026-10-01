@@ -1,30 +1,538 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+    /* =========================================
+       StaySphere - Listing Details Page
+    ========================================== */
+
+    .show-page-container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 35px 20px 70px;
+        color: #f5f7fa;
+    }
+
+    /* =========================================
+       HERO / LISTING CARD
+    ========================================== */
+
+    .listing-hero-card {
+        overflow: hidden;
+        background: #111e31;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+    }
+
+    .listing-hero-img {
+        display: block;
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        background: #17253a;
+    }
+
+    .listing-hero-body {
+        padding: 28px 32px 10px;
+    }
+
+    .listing-meta {
+        margin-bottom: 8px;
+    }
+
+    .listing-host {
+        margin: 0;
+        color: #8492a6;
+        font-size: 0.9rem;
+    }
+
+    .listing-host span {
+        color: #20d5c3;
+        font-weight: 600;
+    }
+
+    .listing-title {
+        margin: 5px 0 12px;
+        color: #f5f7fa;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 750;
+        line-height: 1.15;
+    }
+
+    .listing-description {
+        max-width: 850px;
+        margin: 0;
+        color: #9aa8bb;
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    /* =========================================
+       LISTING INFORMATION
+    ========================================== */
+
+    .listing-info-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        padding: 22px 32px;
+        margin: 0;
+
+        list-style: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .listing-info-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        min-height: 45px;
+        padding: 9px 15px;
+
+        color: #aab6c6;
+        background: #17253a;
+
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+
+        font-size: 0.9rem;
+    }
+
+    .listing-info-item strong {
+        color: #f5f7fa;
+        font-weight: 600;
+    }
+
+    .listing-info-item.price {
+        background: rgba(32, 213, 195, 0.08);
+        border-color: rgba(32, 213, 195, 0.18);
+    }
+
+    .price-value {
+        color: #20d5c3;
+        font-size: 1.15rem;
+        font-weight: 750;
+    }
+
+    .price-label {
+        color: #8492a6;
+        font-size: 0.82rem;
+    }
+
+    /* =========================================
+       ACTION BUTTONS
+    ========================================== */
+
+    .listing-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 0 32px 30px;
+    }
+
+    .listing-actions form {
+        margin: 0;
+    }
+
+    .action-btn {
+        min-width: 135px;
+        border-radius: 11px;
+        padding: 10px 18px;
+        font-weight: 600;
+    }
+
+    .listing-actions .btn-outline-primary {
+        color: #20d5c3;
+        border-color: #20d5c3;
+    }
+
+    .listing-actions .btn-outline-primary:hover {
+        color: #0b1424;
+        background: #20d5c3;
+        border-color: #20d5c3;
+    }
+
+    .listing-actions .btn-danger {
+        background: #ff385c;
+        border-color: #ff385c;
+    }
+
+    .listing-actions .btn-danger:hover {
+        background: #e92f50;
+        border-color: #e92f50;
+    }
+
+    /* =========================================
+       COMMON SECTION CARDS
+    ========================================== */
+
+    .review-card,
+    .map-card {
+        margin-top: 28px;
+        padding: 30px;
+
+        background: #111e31;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 22px;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.20);
+    }
+
+    .section-title {
+        margin: 0 0 22px;
+
+        color: #f5f7fa;
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    /* =========================================
+       REVIEW FORM
+    ========================================== */
+
+    .review-form {
+        max-width: 700px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 9px;
+
+        color: #dce3ec;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .rating-slider {
+        width: 100%;
+        accent-color: #20d5c3;
+        cursor: pointer;
+    }
+
+    .rating-labels {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 7px;
+
+        color: #8492a6;
+        font-size: 0.78rem;
+    }
+
+    .review-input {
+        width: 100%;
+        resize: vertical;
+
+        padding: 13px 15px;
+
+        color: #f5f7fa;
+        background: #17253a;
+
+        border: 1px solid #263750;
+        border-radius: 12px;
+
+        outline: none;
+
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .review-input::placeholder {
+        color: #6f7d90;
+    }
+
+    .review-input:focus {
+        color: #fff;
+        background: #17253a;
+        border-color: #20d5c3;
+
+        box-shadow: 0 0 0 3px rgba(32, 213, 195, 0.08);
+    }
+
+    .submit-review-btn {
+        padding: 10px 20px;
+
+        border: none;
+        border-radius: 11px;
+
+        color: #fff;
+        background: linear-gradient(
+            135deg,
+            #ff385c,
+            #ff4f70
+        );
+
+        font-weight: 600;
+
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .submit-review-btn:hover {
+        transform: translateY(-2px);
+        color: #fff;
+
+        box-shadow: 0 10px 25px rgba(255, 56, 92, 0.22);
+    }
+
+    .divider {
+        margin: 30px 0;
+
+        border-color: rgba(255, 255, 255, 0.07);
+        opacity: 1;
+    }
+
+    /* =========================================
+       REVIEW ITEMS
+    ========================================== */
+
+    .review-item {
+        position: relative;
+
+        padding: 22px 0;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .review-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .review-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .avatar-circle {
+        width: 44px;
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        color: #fff;
+        background: linear-gradient(
+            135deg,
+            #20d5c3,
+            #159c91
+        );
+
+        font-size: 1rem;
+        font-weight: 700;
+
+        box-shadow: 0 6px 18px rgba(32, 213, 195, 0.15);
+    }
+
+    .review-user-info h5 {
+        margin: 0 0 3px;
+
+        color: #f5f7fa;
+        font-size: 0.95rem;
+        font-weight: 650;
+    }
+
+    .review-user-info small {
+        color: #68778b;
+        font-size: 0.75rem;
+    }
+
+    .review-rating {
+        margin: 13px 0 8px;
+
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+    }
+
+    .review-text {
+        max-width: 850px;
+        margin: 0;
+
+        color: #aab6c6;
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    .delete-review-btn {
+        margin-top: 14px;
+
+        border-radius: 9px;
+
+        color: #ff637d;
+        border-color: rgba(255, 56, 92, 0.45);
+
+        font-size: 0.78rem;
+    }
+
+    .delete-review-btn:hover {
+        color: #fff;
+        background: #ff385c;
+        border-color: #ff385c;
+    }
+
+    /* =========================================
+       MAP
+    ========================================== */
+
+    .map-location-text {
+        margin: -10px 0 20px;
+
+        color: #8492a6;
+        font-size: 0.9rem;
+    }
+
+    .map-box {
+        width: 100%;
+        height: 430px;
+
+        overflow: hidden;
+
+        background: #17253a;
+
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+    }
+
+    .map-warning {
+        padding: 25px;
+
+        color: #ffb4c0;
+        background: rgba(255, 56, 92, 0.08);
+
+        border: 1px solid rgba(255, 56, 92, 0.18);
+        border-radius: 12px;
+
+        text-align: center;
+    }
+
+    /* Leaflet popup */
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        background: #111e31;
+        color: #f5f7fa;
+    }
+
+    .leaflet-popup-content {
+        font-weight: 600;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 768px) {
+
+        .show-page-container {
+            padding: 20px 14px 50px;
+        }
+
+        .listing-hero-img {
+            height: 300px;
+        }
+
+        .listing-hero-body {
+            padding: 22px 20px 8px;
+        }
+
+        .listing-title {
+            font-size: 1.9rem;
+        }
+
+        .listing-info-list {
+            padding: 18px 20px;
+        }
+
+        .listing-actions {
+            padding: 0 20px 22px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .action-btn {
+            width: 100%;
+        }
+
+        .review-card,
+        .map-card {
+            padding: 22px 18px;
+        }
+
+        .map-box {
+            height: 340px;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .listing-hero-img {
+            height: 240px;
+        }
+
+        .listing-info-list {
+            flex-direction: column;
+        }
+
+        .listing-info-item {
+            width: 100%;
+        }
+
+        .rating-labels {
+            font-size: 0.7rem;
+        }
+
+        .map-box {
+            height: 290px;
+        }
+    }
+</style>
+
+
 <div class="show-page-container">
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+
     <div class="listing-hero-card">
 
         <img
-            src="<%= list.image.url || 'https://images.pexels.com/photos/29511872/pexels-photo-29511872.jpeg' %>"
+            src="<%= list.image && list.image.url
+                ? list.image.url
+                : 'https://images.pexels.com/photos/29511872/pexels-photo-29511872.jpeg' %>"
             class="listing-hero-img"
-            alt="listing-image"
+            alt="<%= list.title %>"
         >
+
 
         <div class="listing-hero-body">
 
             <div class="listing-meta">
+
                 <p class="listing-host">
                     Hosted by
                     <span>
-                        <%= list.owner ? list.owner.username : "WanderLust Bot" %>
+                        <%= list.owner
+                            ? list.owner.username
+                            : "StaySphere Host" %>
                     </span>
                 </p>
+
             </div>
+
 
             <h1 class="listing-title">
                 <%= list.title %>
             </h1>
+
 
             <p class="listing-description">
                 <%= list.description %>
@@ -32,192 +540,371 @@
 
         </div>
 
+
+        <!-- Listing Information -->
+
         <ul class="listing-info-list">
 
             <li class="listing-info-item price">
+
                 <span class="price-value">
-                    ₹<%= list.price?.toLocaleString("en-IN") || "N/A" %>
+                    ₹<%= list.price
+                        ? list.price.toLocaleString("en-IN")
+                        : "N/A" %>
                 </span>
-                <span class="price-label">/ night</span>
+
+                <span class="price-label">
+                    / night
+                </span>
+
             </li>
 
-            <li class="listing-info-item">
-                📍 <strong><%= list.location %></strong>
-            </li>
 
             <li class="listing-info-item">
-                🌍 <strong><%= list.country %></strong>
+
+                <i class="fa-solid fa-location-dot"
+                   style="color:#20d5c3;"></i>
+
+                <strong>
+                    <%= list.location %>
+                </strong>
+
+            </li>
+
+
+            <li class="listing-info-item">
+
+                <i class="fa-solid fa-earth-americas"
+                   style="color:#20d5c3;"></i>
+
+                <strong>
+                    <%= list.country %>
+                </strong>
+
             </li>
 
         </ul>
 
-        <% if(currUser && list.owner && list.owner._id.equals(currUser._id)){ %>
 
-        <div class="listing-actions">
+        <!-- Owner Actions -->
 
-            <a href="/listings/<%= list._id %>/edit" class="btn btn-outline-primary action-btn">
-                Edit Listing
-            </a>
+        <% if (
+            currUser &&
+            list.owner &&
+            list.owner._id.equals(currUser._id)
+        ) { %>
 
-            <form method="POST"
-                  action="/listings/<%= list._id %>?_method=DELETE"
-                  onsubmit="return confirm('Delete this listing?');">
+            <div class="listing-actions">
 
-                <button class="btn btn-danger action-btn">
-                    Delete Listing
-                </button>
-
-            </form>
-
-        </div>
-
-        <% } %>
-
-    </div>
+                <a
+                    href="/listings/<%= list._id %>/edit"
+                    class="btn btn-outline-primary action-btn"
+                >
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                    Edit Listing
+                </a>
 
 
-    <!-- ===== REVIEW SECTION ===== -->
-    <div class="review-card">
+                <form
+                    method="POST"
+                    action="/listings/<%= list._id %>?_method=DELETE"
+                    onsubmit="return confirm('Are you sure you want to delete this listing?');"
+                >
 
-        <% if(currUser){ %>
-
-        <h2 class="section-title">Leave a Review</h2>
-
-        <form action="/listings/<%= list._id %>/reviews"
-              method="POST"
-              class="review-form">
-
-            <div class="form-group">
-
-                <label>Rating</label>
-
-                <input type="range"
-                       min="1"
-                       max="5"
-                       name="review[rating]"
-                       class="rating-slider">
-
-                <div class="rating-labels">
-                    <span>1 ⭐</span>
-                    <span>2 ⭐</span>
-                    <span>3 ⭐</span>
-                    <span>4 ⭐</span>
-                    <span>5 ⭐</span>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Comment</label>
-
-                <textarea name="review[comment]"
-                          rows="4"
-                          class="review-input"
-                          placeholder="Share your experience..."
-                          required></textarea>
-
-            </div>
-
-            <button class="btn btn-primary submit-review-btn">
-                Submit Review
-            </button>
-
-        </form>
-
-        <hr class="divider">
-
-        <% } %>
-
-
-        <% if(list.reviews.length > 0){ %>
-            <h3 class="section-title">
-                Reviews (<%= list.reviews.length %>)
-            </h3>
-        <% } %>
-
-
-        <% for(let review of list.reviews){ %>
-
-        <div class="review-item">
-
-            <div class="review-header">
-
-                <div class="review-avatar">
-                    <div class="avatar-circle">
-                        <%= review.author ? review.author.username.charAt(0).toUpperCase() : "G" %>
-                    </div>
-                </div>
-
-                <div class="review-user-info">
-
-                    <h5>
-                        <%= review.author ? review.author.username : "Guest User" %>
-                    </h5>
-
-                    <small>
-                        <%= new Date(review.createdAt).toLocaleString("en-IN", {
-                            timeZone: "Asia/Kolkata"
-                        }) %>
-                    </small>
-
-                </div>
-
-            </div>
-
-            <div class="review-rating">
-                <% for(let i = 0; i < review.rating; i++){ %>
-                    ⭐
-                <% } %>
-            </div>
-
-            <p class="review-text">
-                <%= review.comment %>
-            </p>
-
-            <% if(currUser && ((list.owner && list.owner._id.equals(currUser._id)) ||
-                (review.author && review.author._id.equals(currUser._id)))){ %>
-
-                <form action="/listings/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE"
-                      method="POST">
-
-                    <button class="btn btn-outline-danger btn-sm delete-review-btn">
-                        Delete Review
+                    <button
+                        type="submit"
+                        class="btn btn-danger action-btn"
+                    >
+                        <i class="fa-solid fa-trash me-2"></i>
+                        Delete Listing
                     </button>
 
                 </form>
 
-            <% } %>
-
-        </div>
+            </div>
 
         <% } %>
 
     </div>
 
 
-    <!-- ===== MAP SECTION ===== -->
+
+    <!-- =========================================
+         REVIEW SECTION
+    ========================================== -->
+
+    <div class="review-card">
+
+        <% if (currUser) { %>
+
+            <h2 class="section-title">
+                Leave a Review
+            </h2>
+
+
+            <form
+                action="/listings/<%= list._id %>/reviews"
+                method="POST"
+                class="review-form"
+            >
+
+                <!-- Rating -->
+
+                <div class="form-group">
+
+                    <label for="rating">
+                        Rating
+                    </label>
+
+                    <input
+                        type="range"
+                        id="rating"
+                        min="1"
+                        max="5"
+                        value="5"
+                        name="review[rating]"
+                        class="rating-slider"
+                    >
+
+                    <div class="rating-labels">
+                        <span>1 ⭐</span>
+                        <span>2 ⭐</span>
+                        <span>3 ⭐</span>
+                        <span>4 ⭐</span>
+                        <span>5 ⭐</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Comment -->
+
+                <div class="form-group">
+
+                    <label for="comment">
+                        Comment
+                    </label>
+
+                    <textarea
+                        id="comment"
+                        name="review[comment]"
+                        rows="4"
+                        class="review-input"
+                        placeholder="Share your experience..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn submit-review-btn"
+                >
+                    <i class="fa-solid fa-paper-plane me-2"></i>
+                    Submit Review
+                </button>
+
+            </form>
+
+
+            <hr class="divider">
+
+        <% } %>
+
+
+        <!-- Reviews Heading -->
+
+        <% if (list.reviews && list.reviews.length > 0) { %>
+
+            <h3 class="section-title">
+                Reviews
+                <span style="color:#20d5c3;">
+                    (<%= list.reviews.length %>)
+                </span>
+            </h3>
+
+        <% } else { %>
+
+            <h3 class="section-title">
+                Reviews
+            </h3>
+
+            <p style="color:#8492a6;">
+                No reviews yet. Be the first to share your experience!
+            </p>
+
+        <% } %>
+
+
+
+        <!-- Review List -->
+
+        <% if (list.reviews && list.reviews.length > 0) { %>
+
+            <% for (let review of list.reviews) { %>
+
+                <div class="review-item">
+
+                    <div class="review-header">
+
+                        <div class="review-avatar">
+
+                            <div class="avatar-circle">
+
+                                <%= review.author &&
+                                    review.author.username
+                                    ? review.author.username
+                                        .charAt(0)
+                                        .toUpperCase()
+                                    : "G" %>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-user-info">
+
+                            <h5>
+                                <%= review.author
+                                    ? review.author.username
+                                    : "Guest User" %>
+                            </h5>
+
+                            <small>
+
+                                <%= review.createdAt
+                                    ? new Date(review.createdAt)
+                                        .toLocaleString("en-IN", {
+                                            timeZone: "Asia/Kolkata"
+                                        })
+                                    : "Recently" %>
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Rating -->
+
+                    <div class="review-rating">
+
+                        <% for (
+                            let i = 0;
+                            i < Number(review.rating || 0);
+                            i++
+                        ) { %>
+
+                            ⭐
+
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- Comment -->
+
+                    <p class="review-text">
+                        <%= review.comment %>
+                    </p>
+
+
+                    <!-- Delete Review -->
+
+                    <% if (
+                        currUser &&
+                        (
+                            (
+                                list.owner &&
+                                list.owner._id.equals(currUser._id)
+                            )
+                            ||
+                            (
+                                review.author &&
+                                review.author._id.equals(currUser._id)
+                            )
+                        )
+                    ) { %>
+
+                        <form
+                            action="/listings/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE"
+                            method="POST"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger btn-sm delete-review-btn"
+                            >
+                                <i class="fa-solid fa-trash me-1"></i>
+                                Delete Review
+                            </button>
+
+                        </form>
+
+                    <% } %>
+
+                </div>
+
+            <% } %>
+
+        <% } %>
+
+    </div>
+
+
+
+    <!-- =========================================
+         MAP SECTION
+    ========================================== -->
+
     <div class="map-card">
 
-        <h2 class="section-title">📍 Where you'll be</h2>
+        <h2 class="section-title">
+            <i
+                class="fa-solid fa-location-dot"
+                style="color:#20d5c3;"
+            ></i>
+            Where you'll be
+        </h2>
+
 
         <p class="map-location-text">
-            <%= list.location %>, <%= list.country %>
+
+            <%= list.location %>,
+            <%= list.country %>
+
         </p>
 
-        <% if(list.geometry && list.geometry.coordinates && list.geometry.coordinates.length === 2){ %>
 
-            <div id="map"
-                 class="map-box"
-                 data-lat="<%= list.geometry.coordinates[1] %>"
-                 data-lng="<%= list.geometry.coordinates[0] %>"
-                 data-title="<%= list.title %>">
-            </div>
+        <% if (
+            list.geometry &&
+            list.geometry.coordinates &&
+            list.geometry.coordinates.length === 2
+        ) { %>
+
+            <div
+                id="map"
+                class="map-box"
+
+                data-lat="<%= list.geometry.coordinates[1] %>"
+
+                data-lng="<%= list.geometry.coordinates[0] %>"
+
+                data-title="<%= list.title %>"
+            ></div>
 
         <% } else { %>
 
             <div class="map-warning">
-                Location coordinates are not available for this listing.
+
+                <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+                Location coordinates are not available
+                for this listing.
+
             </div>
 
         <% } %>

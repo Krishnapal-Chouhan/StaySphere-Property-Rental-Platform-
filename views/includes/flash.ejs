@@ -1,18 +1,480 @@
-<% if (typeof success !== "undefined" && success.length) { %>
+<!-- =========================================================
+     STAYSPHERE FLASH MESSAGES
+========================================================= -->
 
-<div class="alert alert-success alert-dismissible fade show col-6 offset-3 flash-alert" role="alert">
-    <%= success[0] %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+<style>
+
+/* =========================================================
+   FLASH CONTAINER
+========================================================= */
+
+.flash-container {
+    position: fixed;
+
+    top: 92px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(520px, calc(100% - 30px));
+
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   COMMON FLASH
+========================================================= */
+
+.flash-alert {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    margin: 0 !important;
+
+    padding: 14px 45px 14px 17px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 14px;
+
+    background: rgba(8, 29, 45, 0.96);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    color: #e8f4f7;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30);
+
+    pointer-events: auto;
+
+    overflow: hidden;
+
+    animation: flashSlideIn 0.45s ease forwards;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.flash-success {
+    border-color: rgba(0, 221, 220, 0.35);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30),
+        0 0 20px rgba(0, 221, 220, 0.08);
+}
+
+
+/* Success left indicator */
+
+.flash-success::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+    background: #00d9dc;
+
+    box-shadow: 0 0 12px rgba(0, 217, 220, 0.6);
+}
+
+
+/* Success icon */
+
+.flash-success::after {
+    content: "✓";
+
+    position: absolute;
+
+    left: 17px;
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(0, 217, 220, 0.12);
+
+    color: #00e5e9;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* Success text */
+
+.flash-success .flash-message {
+    padding-left: 42px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.flash-error {
+    border-color: rgba(255, 56, 92, 0.38);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30),
+        0 0 20px rgba(255, 56, 92, 0.08);
+}
+
+
+/* Error left indicator */
+
+.flash-error::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+    background: #ff385c;
+
+    box-shadow: 0 0 12px rgba(255, 56, 92, 0.55);
+}
+
+
+/* Error icon */
+
+.flash-error::after {
+    content: "!";
+
+    position: absolute;
+
+    left: 17px;
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 56, 92, 0.12);
+
+    color: #ff5c78;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+
+/* Error text */
+
+.flash-error .flash-message {
+    padding-left: 42px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.flash-alert .btn-close {
+    position: absolute;
+
+    top: 50%;
+    right: 13px;
+
+    transform: translateY(-50%);
+
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    opacity: 0.7;
+
+    border-radius: 50%;
+
+    background: none !important;
+
+    color: #b5c8d0;
+
+    font-size: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Create X manually */
+
+.flash-alert .btn-close::before,
+.flash-alert .btn-close::after {
+    content: "";
+
+    position: absolute;
+
+    width: 13px;
+    height: 2px;
+
+    background: #b5c8d0;
+
+    border-radius: 5px;
+}
+
+.flash-alert .btn-close::before {
+    transform: rotate(45deg);
+}
+
+.flash-alert .btn-close::after {
+    transform: rotate(-45deg);
+}
+
+
+.flash-alert .btn-close:hover {
+    opacity: 1;
+
+    background: rgba(255, 255, 255, 0.08) !important;
+
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes flashSlideIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-25px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   DISMISS ANIMATION
+========================================================= */
+
+.flash-alert.flash-hide {
+
+    animation: flashSlideOut 0.35s ease forwards;
+
+}
+
+
+@keyframes flashSlideOut {
+
+    from {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            scale(0.96);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .flash-container {
+
+        top: 85px;
+
+        width: calc(100% - 24px);
+    }
+
+
+    .flash-alert {
+
+        min-height: 54px;
+
+        font-size: 13px;
+
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     FLASH CONTAINER
+========================================================= -->
+
+<div class="flash-container">
+
+
+    <!-- ================= SUCCESS ================= -->
+
+    <% if (typeof success !== "undefined" && success.length) { %>
+
+        <div
+            class="flash-alert flash-success"
+            role="alert">
+
+            <span class="flash-message">
+
+                <%= success[0] %>
+
+            </span>
+
+            <button
+                type="button"
+                class="btn-close"
+                aria-label="Close">
+            </button>
+
+        </div>
+
+    <% } %>
+
+
+    <!-- ================= ERROR ================= -->
+
+    <% if (typeof error !== "undefined" && error.length) { %>
+
+        <div
+            class="flash-alert flash-error"
+            role="alert">
+
+            <span class="flash-message">
+
+                <%= error[0] %>
+
+            </span>
+
+            <button
+                type="button"
+                class="btn-close"
+                aria-label="Close">
+            </button>
+
+        </div>
+
+    <% } %>
+
+
 </div>
 
-<% } %>
+
+<!-- =========================================================
+     FLASH JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const flashMessages =
+        document.querySelectorAll(".flash-alert");
 
 
-<% if (typeof error !== "undefined" && error.length) { %>
+    flashMessages.forEach((flash) => {
 
-<div class="alert alert-danger alert-dismissible fade show col-6 offset-3 flash-alert" role="alert">
-    <%= error[0] %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
 
-<% } %>
+        /* Close button */
+
+        const closeBtn =
+            flash.querySelector(".btn-close");
+
+
+        closeBtn.addEventListener("click", () => {
+
+            hideFlash(flash);
+
+        });
+
+
+        /* Auto hide after 4 seconds */
+
+        setTimeout(() => {
+
+            hideFlash(flash);
+
+        }, 4000);
+
+    });
+
+
+    function hideFlash(flash) {
+
+        if (flash.classList.contains("flash-hide")) {
+            return;
+        }
+
+        flash.classList.add("flash-hide");
+
+
+        setTimeout(() => {
+
+            flash.remove();
+
+        }, 350);
+
+    }
+
+});
+
+</script>

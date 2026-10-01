@@ -13,8 +13,8 @@ userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", userSchema);
 
-console.log(typeof passportLocalMongoose); // function
-console.log(typeof User.authenticate);     // function
-console.log(typeof User.register);         // function
+// console.log(typeof passportLocalMongoose); // function
+// console.log(typeof User.authenticate);     // function
+// console.log(typeof User.register);         // function
 
 module.exports = User;

@@ -1,10 +1,441 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="edit-card">
-<div class="row">
-    <div class="col-8 offset-2">
+<style>
+    .edit-listing-page {
+        min-height: calc(100vh - 80px);
+        padding: 50px 20px 70px;
+        position: relative;
+        overflow: hidden;
 
-        <h3 class="text-center mb-4 editform" style="color: white;">Edit Your Listing</h3>
+        background:
+            radial-gradient(
+                circle at 10% 10%,
+                rgba(20, 213, 195, 0.10),
+                transparent 32%
+            ),
+            radial-gradient(
+                circle at 90% 85%,
+                rgba(255, 56, 92, 0.10),
+                transparent 32%
+            ),
+            #0b1424;
+    }
+
+    /* Decorative glow */
+    .edit-listing-page::before {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: rgba(20, 213, 195, 0.06);
+        filter: blur(70px);
+        top: -150px;
+        left: -100px;
+        pointer-events: none;
+    }
+
+    .edit-listing-page::after {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: rgba(255, 56, 92, 0.06);
+        filter: blur(70px);
+        right: -120px;
+        bottom: -150px;
+        pointer-events: none;
+    }
+
+    /* Main card */
+    .edit-card {
+        width: 100%;
+        max-width: 900px;
+        margin: auto;
+        padding: 42px;
+        position: relative;
+        z-index: 2;
+
+        background: rgba(17, 30, 49, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 26px;
+
+        box-shadow:
+            0 25px 70px rgba(0, 0, 0, 0.38),
+            inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    /* Header */
+    .edit-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 35px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .edit-icon {
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 16px;
+        background: linear-gradient(
+            135deg,
+            #ff385c,
+            #ff617d
+        );
+
+        color: white;
+        font-size: 23px;
+
+        box-shadow:
+            0 10px 25px rgba(255, 56, 92, 0.22);
+    }
+
+    .edit-header h2 {
+        margin: 0;
+        color: #f5f7fa;
+        font-size: 27px;
+        font-weight: 700;
+    }
+
+    .edit-header p {
+        margin: 5px 0 0;
+        color: #8492a6;
+        font-size: 14px;
+    }
+
+    /* Section title */
+    .form-section-title {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        margin: 28px 0 18px;
+
+        color: #20d5c3;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+    .form-section-title i {
+        font-size: 13px;
+    }
+
+    /* Labels */
+    .listing-label {
+        display: block;
+        margin-bottom: 8px;
+
+        color: #dce5ef;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* Inputs */
+    .listing-input,
+    .listing-textarea {
+        width: 100%;
+        box-sizing: border-box;
+
+        border: 1px solid #2a3b52;
+        border-radius: 12px;
+
+        background: #111e31;
+        color: #f5f7fa;
+
+        outline: none;
+        transition: 0.25s ease;
+    }
+
+    .listing-input {
+        height: 50px;
+        padding: 0 15px;
+    }
+
+    .listing-textarea {
+        min-height: 130px;
+        padding: 14px 15px;
+        resize: vertical;
+    }
+
+    .listing-input::placeholder,
+    .listing-textarea::placeholder {
+        color: #64748b;
+    }
+
+    .listing-input:hover,
+    .listing-textarea:hover {
+        border-color: #3b4d65;
+    }
+
+    .listing-input:focus,
+    .listing-textarea:focus {
+        border-color: #20d5c3;
+        box-shadow:
+            0 0 0 3px rgba(32, 213, 195, 0.10);
+        background: #122137;
+    }
+
+    /* Current image */
+    .current-image-box {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: #111e31;
+    }
+
+    .current-image {
+        display: block;
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .current-image-box:hover .current-image {
+        transform: scale(1.025);
+    }
+
+    .image-label {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+
+        padding: 7px 12px;
+        border-radius: 20px;
+
+        background: rgba(8, 16, 29, 0.82);
+        backdrop-filter: blur(8px);
+
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .no-image {
+        height: 180px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+
+        color: #68778c;
+        background: #111e31;
+        border: 1px dashed #33445b;
+        border-radius: 16px;
+    }
+
+    .no-image i {
+        font-size: 28px;
+    }
+
+    /* File upload */
+    .file-wrapper {
+        position: relative;
+    }
+
+    .file-input {
+        width: 100%;
+        padding: 12px;
+
+        border: 1px dashed #344861;
+        border-radius: 12px;
+
+        background: #111e31;
+        color: #9aa8ba;
+
+        cursor: pointer;
+    }
+
+    .file-input:hover {
+        border-color: #20d5c3;
+    }
+
+    .file-input::file-selector-button {
+        margin-right: 12px;
+        padding: 8px 14px;
+
+        border: none;
+        border-radius: 8px;
+
+        background: #1d3148;
+        color: #dce5ef;
+
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    /* Bottom buttons */
+    .edit-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 35px;
+        padding-top: 25px;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .update-btn,
+    .cancel-btn {
+        height: 50px;
+        padding: 0 25px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+
+        border-radius: 12px;
+
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+
+        transition: 0.25s ease;
+    }
+
+    .update-btn {
+        flex: 1;
+
+        border: none;
+        background: linear-gradient(
+            135deg,
+            #ff385c,
+            #ff4f70
+        );
+
+        color: white;
+        cursor: pointer;
+
+        box-shadow:
+            0 8px 22px rgba(255, 56, 92, 0.20);
+    }
+
+    .update-btn:hover {
+        color: white;
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 12px 30px rgba(255, 56, 92, 0.30);
+    }
+
+    .cancel-btn {
+        min-width: 130px;
+
+        border: 1px solid #304158;
+        background: transparent;
+        color: #b8c4d2;
+    }
+
+    .cancel-btn:hover {
+        color: white;
+        border-color: #4a5c75;
+        background: #17253a;
+        transform: translateY(-2px);
+    }
+
+    .update-btn:active,
+    .cancel-btn:active {
+        transform: scale(0.98);
+    }
+
+    /* Validation */
+    .invalid-feedback {
+        color: #ff718b;
+        margin-top: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .edit-listing-page {
+            padding: 35px 15px 50px;
+        }
+
+        .edit-card {
+            padding: 28px 22px;
+            border-radius: 21px;
+        }
+
+        .edit-header h2 {
+            font-size: 23px;
+        }
+
+        .current-image {
+            height: 230px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .edit-card {
+            padding: 24px 17px;
+        }
+
+        .edit-header {
+            gap: 13px;
+        }
+
+        .edit-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 19px;
+            border-radius: 13px;
+        }
+
+        .edit-header h2 {
+            font-size: 20px;
+        }
+
+        .edit-header p {
+            font-size: 12px;
+        }
+
+        .current-image {
+            height: 200px;
+        }
+
+        .edit-actions {
+            flex-direction: column-reverse;
+        }
+
+        .update-btn,
+        .cancel-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="edit-listing-page">
+
+    <div class="edit-card">
+
+        <!-- Header -->
+        <div class="edit-header">
+
+            <div class="edit-icon">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </div>
+
+            <div>
+                <h2>Edit Your Listing</h2>
+                <p>Update your property details and keep your listing fresh.</p>
+            </div>
+
+        </div>
+
 
         <form
             method="POST"
@@ -14,122 +445,221 @@
             novalidate
         >
 
+            <!-- BASIC INFORMATION -->
+            <div class="form-section-title">
+                <i class="fa-solid fa-circle-info"></i>
+                Basic Information
+            </div>
+
+
             <!-- Title -->
             <div class="mb-3">
-                <label for="title" class="form-label titletag ">Title</label>
+
+                <label for="title" class="listing-label">
+                    Property Title
+                </label>
+
                 <input
                     type="text"
                     id="title"
                     name="listing[title]"
                     value="<%= listing.title %>"
-                    class="form-control"
+                    class="listing-input"
+                    placeholder="Enter your property title"
                     required
                 >
+
                 <div class="invalid-feedback">
-                    Name should be valid.
+                    Please enter a valid property title.
                 </div>
+
             </div>
+
 
             <!-- Description -->
             <div class="mb-3">
-                <label for="descrip" class="form-label titletag">Description</label>
+
+                <label for="descrip" class="listing-label">
+                    Description
+                </label>
+
                 <textarea
                     id="descrip"
                     name="listing[description]"
-                    class="form-control"
+                    class="listing-textarea"
+                    placeholder="Describe your property..."
                     required
                 ><%= listing.description %></textarea>
+
             </div>
 
-            <!-- Previous Image -->
-            <div class="mb-3">
-                <label class="form-label titletag">Previous Image</label>
-                <br>
 
-                <% if(listing.image && listing.image.url) { %>
-                    <img
-                        src="<%= modifiedImageUrl %>"
-                        alt="Current Image"
-                        class="rounded border"
-                        style="height: 250px; width:100%; object-fit: cover;"
-                    >
-                <% } else { %>
-                    <p class="text-muted">No image available</p>
-                <% } %>
+            <!-- LOCATION -->
+            <div class="form-section-title">
+                <i class="fa-solid fa-location-dot"></i>
+                Location & Pricing
             </div>
 
-            <!-- Upload New Image -->
-            <div class="mb-3">
-                <label for="img" class="form-label titletag">
-                    Upload New Image
-                </label>
 
-                <input
-                    type="file"
-                    id="img"
-                    name="listing-image"
-                    class="form-control"
-                >
-            </div>
-
-            <!-- Price + Location -->
             <div class="row">
+
+                <!-- Price -->
                 <div class="col-md-4 mb-3">
-                    <label for="price" class="form-label titletag">Price</label>
+
+                    <label for="price" class="listing-label">
+                        Price / Night
+                    </label>
 
                     <input
                         type="number"
                         id="price"
                         name="listing[price]"
                         value="<%= listing.price %>"
-                        class="form-control"
+                        class="listing-input"
+                        min="0"
                         required
                     >
+
                 </div>
 
+
+                <!-- Location -->
                 <div class="col-md-8 mb-3">
-                    <label for="location" class="form-label titletag">Location</label>
+
+                    <label for="location" class="listing-label">
+                        Location
+                    </label>
 
                     <input
                         type="text"
                         id="location"
                         name="listing[location]"
                         value="<%= listing.location %>"
-                        class="form-control"
+                        class="listing-input"
+                        placeholder="City or location"
                         required
                     >
 
                     <div class="invalid-feedback">
-                        Location should be valid.
+                        Please enter a valid location.
                     </div>
+
                 </div>
+
             </div>
+
 
             <!-- Country -->
             <div class="mb-3">
-                <label for="country" class="form-label titletag">Country</label>
+
+                <label for="country" class="listing-label">
+                    Country
+                </label>
 
                 <input
                     type="text"
                     id="country"
                     name="listing[country]"
                     value="<%= listing.country %>"
-                    class="form-control"
+                    class="listing-input"
+                    placeholder="Enter country"
                     required
                 >
 
                 <div class="invalid-feedback">
-                    Country name should be valid.
+                    Please enter a valid country.
                 </div>
+
             </div>
 
-            <!-- Submit Button -->
-            <button class="btn btn-dark w-100">
-                Update Listing
-            </button>
+
+            <!-- IMAGES -->
+            <div class="form-section-title">
+                <i class="fa-regular fa-image"></i>
+                Property Image
+            </div>
+
+
+            <!-- Current Image -->
+            <div class="mb-4">
+
+                <label class="listing-label">
+                    Current Image
+                </label>
+
+                <% if (listing.image && listing.image.url) { %>
+
+                    <div class="current-image-box">
+
+                        <span class="image-label">
+                            Current Property Image
+                        </span>
+
+                        <img
+                            src="<%= modifiedImageUrl %>"
+                            alt="Current property image"
+                            class="current-image"
+                        >
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="no-image">
+                        <i class="fa-regular fa-image"></i>
+                        <span>No image available</span>
+                    </div>
+
+                <% } %>
+
+            </div>
+
+
+            <!-- New Image -->
+            <div class="mb-3">
+
+                <label for="img" class="listing-label">
+                    Upload New Image
+                </label>
+
+                <div class="file-wrapper">
+
+                    <input
+                        type="file"
+                        id="img"
+                        name="listing-image"
+                        class="file-input"
+                        accept="image/*"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+            <div class="edit-actions">
+
+                <a
+                    href="/listings/<%= listing._id %>"
+                    class="cancel-btn"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="update-btn"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Update Listing
+                </button>
+
+            </div>
 
         </form>
 
     </div>
-</div>
+
 </div>

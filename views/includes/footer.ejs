@@ -1,50 +1,470 @@
 <footer class="custom-footer">
-  <div class="container m-3">
 
-    <div class="row">
+    <div class="container">
 
-      <!-- Brand -->
-      <div class="col-md-4 mb-3">
-        <h5 class="footer-brand">StaySphere</h5>
-        <p class="footer-text">
-          Explore the world with the best stays and experiences. Travel smarter with WanderLust.
-        </p>
-      </div>
+        <!-- Main Footer -->
+        <div class="row footer-main">
 
-      <!-- Links -->
-      <div class="col-md-4 mb-3">
-        <h6 class="footer-title">Quick Links</h6>
-        <ul class="footer-links">
-          <li><a href="/listings">Home</a></li>
-          <li><a href="/listings/new">Add Listing</a></li>
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Pricing</a></li>
-        </ul>
-      </div>
+            <!-- Brand -->
+            <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
 
-      <!-- Social -->
-      <div class="col-md-4 mb-3">
-        <h6 class="footer-title">Follow Us</h6>
-        <div class="footer-socials">
-          <i class="fa-brands fa-facebook"></i>
-          <i class="fa-brands fa-whatsapp"></i>
-          <i class="fa-brands fa-instagram"></i>
-          <i class="fa-brands fa-linkedin"></i>
+                <a href="/listings" class="footer-brand">
+                    <i class="fa-solid fa-compass"></i>
+                    StaySphere
+                </a>
+
+                <p class="footer-text">
+                    Discover amazing stays, unique properties, and
+                    unforgettable experiences. Travel smarter with
+                    StaySphere.
+                </p>
+
+                <div class="footer-tagline">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Find your next stay
+                </div>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div class="col-lg-3 col-md-3 col-6 mb-4 mb-md-0">
+
+                <h6 class="footer-title">
+                    Quick Links
+                </h6>
+
+                <ul class="footer-links">
+
+                    <li>
+                        <a href="/listings">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            Explore
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/listings/new">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            Add Listing
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/listings">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            Stays
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            Features
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Social -->
+            <div class="col-lg-4 col-md-3 col-6">
+
+                <h6 class="footer-title">
+                    Connect With Us
+                </h6>
+
+                <p class="footer-social-text">
+                    Follow StaySphere for travel inspiration
+                    and new destinations.
+                </p>
+
+                <div class="footer-socials">
+
+                    <a
+                        href="#"
+                        class="social-icon"
+                        aria-label="Facebook"
+                    >
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="social-icon"
+                        aria-label="WhatsApp"
+                    >
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="social-icon"
+                        aria-label="Instagram"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/"
+                        class="social-icon"
+                        aria-label="LinkedIn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
+
+
+        <!-- Divider -->
+        <div class="footer-divider"></div>
+
+
+        <!-- Bottom -->
+        <div class="footer-bottom">
+
+            <p>
+                &copy; 2026 StaySphere. All rights reserved.
+            </p>
+
+            <div class="footer-bottom-links">
+
+                <a href="/privacy">
+                    Privacy
+                </a>
+
+                <a href="/terms">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <hr>
-
-    <!-- Bottom -->
-    <div class="footer-bottom">
-      <p>&copy; 2026 WanderLust Private Limited</p>
-      <div>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-      </div>
-    </div>
-
-  </div>
 </footer>
+
+
+<style>
+
+    /* =================================
+       StaySphere Footer
+    ================================= */
+
+    .custom-footer {
+        position: relative;
+
+        margin-top: 70px;
+        padding: 55px 0 20px;
+
+        background:
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(32, 213, 195, 0.08),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 85% 30%,
+                rgba(255, 56, 92, 0.07),
+                transparent 28%
+            ),
+            #0b1424;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+        color: #f5f7fa;
+    }
+
+
+    /* Main section */
+
+    .footer-main {
+        padding-bottom: 25px;
+    }
+
+
+    /* Brand */
+
+    .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        color: #f5f7fa;
+
+        font-size: 1.55rem;
+        font-weight: 700;
+
+        text-decoration: none;
+
+        transition: color 0.25s ease;
+    }
+
+    .footer-brand i {
+        color: #20d5c3;
+        font-size: 1.45rem;
+    }
+
+    .footer-brand:hover {
+        color: #20d5c3;
+    }
+
+
+    /* Description */
+
+    .footer-text {
+        max-width: 430px;
+
+        margin-top: 16px;
+        margin-bottom: 18px;
+
+        color: #8492a6;
+
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+
+    /* Tagline */
+
+    .footer-tagline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: #20d5c3;
+
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .footer-tagline i {
+        font-size: 0.8rem;
+    }
+
+
+    /* Titles */
+
+    .footer-title {
+        margin-bottom: 20px;
+
+        color: #f5f7fa;
+
+        font-size: 0.95rem;
+        font-weight: 700;
+
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+
+    /* Links */
+
+    .footer-links {
+        padding: 0;
+        margin: 0;
+
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 11px;
+    }
+
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: #8492a6;
+
+        font-size: 0.9rem;
+
+        text-decoration: none;
+
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .footer-links a i {
+        color: #20d5c3;
+        font-size: 0.65rem;
+        transition: transform 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: #f5f7fa;
+        transform: translateX(3px);
+    }
+
+    .footer-links a:hover i {
+        transform: translateX(2px);
+    }
+
+
+    /* Social text */
+
+    .footer-social-text {
+        max-width: 260px;
+
+        margin-bottom: 18px;
+
+        color: #8492a6;
+
+        font-size: 0.88rem;
+        line-height: 1.6;
+    }
+
+
+    /* Social icons */
+
+    .footer-socials {
+        display: flex;
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+
+        color: #8492a6;
+        background: #111e31;
+
+        font-size: 0.95rem;
+
+        text-decoration: none;
+
+        transition:
+            transform 0.25s ease,
+            color 0.25s ease,
+            background 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+    .social-icon:hover {
+        transform: translateY(-3px);
+
+        color: #fff;
+
+        background: #17253a;
+        border-color: rgba(32, 213, 195, 0.35);
+
+        box-shadow:
+            0 8px 20px rgba(32, 213, 195, 0.12);
+    }
+
+
+    /* Divider */
+
+    .footer-divider {
+        height: 1px;
+
+        margin: 10px 0 20px;
+
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+
+    /* Bottom */
+
+    .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+    }
+
+    .footer-bottom p {
+        margin: 0;
+
+        color: #64748b;
+
+        font-size: 0.8rem;
+    }
+
+
+    /* Bottom links */
+
+    .footer-bottom-links {
+        display: flex;
+        gap: 22px;
+    }
+
+    .footer-bottom-links a {
+        color: #8492a6;
+
+        font-size: 0.8rem;
+
+        text-decoration: none;
+
+        transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+        color: #20d5c3;
+    }
+
+
+    /* =================================
+       Responsive
+    ================================= */
+
+    @media (max-width: 767px) {
+
+        .custom-footer {
+            margin-top: 45px;
+            padding: 40px 0 18px;
+        }
+
+        .footer-main {
+            text-align: left;
+        }
+
+        .footer-title {
+            margin-top: 10px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-bottom-links {
+            gap: 18px;
+        }
+
+    }
+
+
+    @media (max-width: 400px) {
+
+        .footer-socials {
+            gap: 7px;
+        }
+
+        .social-icon {
+            width: 37px;
+            height: 37px;
+        }
+
+    }
+
+</style>

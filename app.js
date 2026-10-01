@@ -23,6 +23,8 @@ const session = require("express-session");
 const mongoStore = require("connect-mongo");
 
 const flash = require("connect-flash");
+
+// Authenication
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/users.js");
@@ -41,6 +43,10 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 app.use(express.static(path.join(__dirname, "public")));
 // const Mongo_url = "mongodb://127.0.0.1:27017/wanderlust"
 const ClouddbUrl = process.env.MONGODB_ATLAS_URI;
+
+
+
+
 
 
 app.set("view engine", "ejs");
@@ -78,14 +84,16 @@ const sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(flash());
+//pbkdf2 hashing function
+app.use(passport.initialize()); // Initialized Passport as a Middleware..
+app.use(passport.session());  //A Web Application needs the ability to identify users as they browse from page to page.
+                                // This Series of Requests and Responses, each  associated with the same user, is known as a session
 
-app.use(passport.initialize());
-app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));  //That mean we Creating local Strategy in Passport, so All Users are authenticated through Local Strategy and Authenicated those user is used Authenticate() method..
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser()); // Passport Serialize User Using .serialize method() basically that method is Ussed by Passport to Serialize (Saved) into the session...
+passport.deserializeUser(User.deserializeUser());  // aur user se related jitani bhii infomation hai usko hum unstore karwate h usako hum Deserialized kehte h
 
 
 // Flash Middleware
@@ -94,14 +102,9 @@ app.use((req, res, next) => {
     res.locals.errormsg = req.flash("error");
     res.locals.currUser = req.user;
 
-
-    //  console.log("currUSer is ", req.user);
-
-
     next();
 
 });
-
 
 
 

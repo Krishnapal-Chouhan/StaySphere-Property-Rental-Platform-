@@ -1,0 +1,250 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .edit-profile-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background:
+      radial-gradient(circle at top left, rgba(0, 220, 200, 0.08), transparent 35%),
+      radial-gradient(circle at bottom right, rgba(255, 56, 92, 0.08), transparent 35%),
+      #0b1424;
+  }
+
+  .profile-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background: rgba(18, 30, 48, 0.92);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .profile-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff385c, #ff617d);
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(255, 56, 92, 0.25);
+  }
+
+  .profile-title {
+    text-align: center;
+    color: #f5f7fa;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .profile-subtitle {
+    text-align: center;
+    color: #8d9aae;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 22px;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #dce5ef;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    border: 1px solid #29394f;
+    border-radius: 12px;
+    outline: none;
+    background: #111e31;
+    color: #f5f7fa;
+    font-size: 15px;
+    transition: 0.25s ease;
+    box-sizing: border-box;
+  }
+
+  .form-input::placeholder {
+    color: #68778c;
+  }
+
+  .form-input:focus {
+    border-color: #20d5c3;
+    box-shadow: 0 0 0 3px rgba(32, 213, 195, 0.12);
+  }
+
+  .form-input:hover {
+    border-color: #3a4d65;
+  }
+
+  .button-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .btn-update,
+  .btn-cancel {
+    flex: 1;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.25s ease;
+  }
+
+  .btn-update {
+    border: none;
+    background: linear-gradient(135deg, #ff385c, #ff4f70);
+    color: white;
+    cursor: pointer;
+  }
+
+  .btn-update:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 56, 92, 0.25);
+  }
+
+  .btn-cancel {
+    border: 1px solid #304158;
+    background: transparent;
+    color: #b8c4d2;
+  }
+
+  .btn-cancel:hover {
+    color: #fff;
+    border-color: #4b5d75;
+    background: #17253a;
+  }
+
+  .user-id {
+    text-align: center;
+    margin-top: 22px;
+    color: #66768b;
+    font-size: 12px;
+  }
+
+  @media (max-width: 576px) {
+    .profile-card {
+      padding: 28px 22px;
+    }
+
+    .button-row {
+      flex-direction: column;
+    }
+
+    .btn-update,
+    .btn-cancel {
+      width: 100%;
+    }
+  }
+</style>
+
+
+<div class="edit-profile-page">
+
+  <div class="profile-card">
+
+    <!-- Profile Icon -->
+    <div class="profile-icon">
+      <%= user.username ? user.username.charAt(0).toUpperCase() : "U" %>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="profile-title">Edit Profile</h2>
+
+    <p class="profile-subtitle">
+      Update your StaySphere account details
+    </p>
+
+
+    <!-- Edit Form -->
+    <form
+      method="POST"
+      action="/profile/edit?_method=PUT"
+    >
+
+      <!-- Username -->
+      <div class="form-group">
+
+        <label for="edit_name" class="form-label">
+          Username
+        </label>
+
+        <input
+          id="edit_name"
+          name="username"
+          type="text"
+          class="form-input"
+          value="<%= user.username %>"
+          placeholder="Enter your username"
+          required
+          minlength="3"
+        >
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="form-group">
+
+        <label for="edit_email" class="form-label">
+          Email Address
+        </label>
+
+        <input
+          id="edit_email"
+          name="email"
+          type="email"
+          class="form-input"
+          value="<%= user.email %>"
+          placeholder="Enter your email"
+          required
+        >
+
+      </div>
+
+
+      <!-- Buttons -->
+      <div class="button-row">
+
+        <a href="/profile" class="btn-cancel">
+          Cancel
+        </a>
+
+        <button type="submit" class="btn-update">
+          Save Changes
+        </button>
+
+      </div>
+
+    </form>
+
+
+    <div class="user-id">
+      Account ID: <%= user._id %>
+    </div>
+
+  </div>
+
+</div>
